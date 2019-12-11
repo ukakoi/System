@@ -1,0 +1,11 @@
+D:\InfoИС-I-2019Base\Sharp_\OOP_PR6\OOP_PR6-1\OOP_PR6-2\obj\Debug\OOP_PR7-1.csprojAssemblyReference.cache
+D:\InfoИС-I-2019Base\Sharp_\OOP_PR6\OOP_PR6-1\OOP_PR6-2\obj\Debug\OOP_PR6_2.Form2.resources
+D:\InfoИС-I-2019Base\Sharp_\OOP_PR6\OOP_PR6-1\OOP_PR6-2\obj\Debug\OOP_PR6_2.Properties.Resources.resources
+D:\InfoИС-I-2019Base\Sharp_\OOP_PR6\OOP_PR6-1\OOP_PR6-2\obj\Debug\OOP_PR7-1.csproj.GenerateResource.cache
+D:\InfoИС-I-2019Base\Sharp_\OOP_PR6\OOP_PR6-1\OOP_PR6-2\obj\Debug\OOP_PR7-1.csproj.CoreCompileInputs.cache
+D:\InfoИС-I-2019Base\Sharp_\OOP_PR6\OOP_PR6-1\OOP_PR6-2\obj\Debug\OOP_PR6-2.exe
+D:\InfoИС-I-2019Base\Sharp_\OOP_PR6\OOP_PR6-1\OOP_PR6-2\obj\Debug\OOP_PR6-2.pdb
+D:\InfoИС-I-2019Base\Sharp_\OOP_PR6\OOP_PR6-1\OOP_PR6-2\obj\Debug\OOP_PR6_2.Form1.resources
+D:\InfoИС-I-2019Base\Sharp_\OOP_PR6\OOP_PR6-1\OOP_PR6-2\bin\Debug\OOP_PR6-2.exe.config
+D:\InfoИС-I-2019Base\Sharp_\OOP_PR6\OOP_PR6-1\OOP_PR6-2\bin\Debug\OOP_PR6-2.exe
+D:\InfoИС-I-2019Base\Sharp_\OOP_PR6\OOP_PR6-1\OOP_PR6-2\bin\Debug\OOP_PR6-2.pdb

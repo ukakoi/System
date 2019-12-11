@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html dir="ltr" class="js firefox firefox70 desktop ya-page_js_yes" lang="ru"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="shortcut icon" href="http://grafika.me/files/grafika_favicon.ico" type="image/x-icon">
+  <title>Основы библиотеки System.Drawing | Компьютерная графика</title>
+  <link type="text/css" rel="stylesheet" media="all" href="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/css_881f8ec1a249eac7d8ec06596314f328.css">
+<link type="text/css" rel="stylesheet" media="screen" href="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/css_67328c2e41d2a7fab5b3e864abc46d24.css">
+    <script type="text/javascript" async="" src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/aci.js"></script><script type="text/javascript" async="" src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/watch.js"></script><script type="text/javascript" async="" src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/code.js"></script><script type="text/javascript" async="" charset="utf-8" src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/all.js"></script><script type="text/javascript" src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/jquery.js"></script>
+<script type="text/javascript" src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/drupal.js"></script>
+<script type="text/javascript" src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/ru_8c6ddc66663128bbd16df958217e2e9a.js"></script>
+<script type="text/javascript" src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/script.js"></script>
+<script type="text/javascript" src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/script_002.js"></script>
+<script type="text/javascript">
+
+jQuery.extend(Drupal.settings, { "basePath": "/" });
+
+</script>
+  
+<meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
+<meta content="http://grafika.me/themes/grafika/images/PrnScreen.png" property="og:image">
+
+
+<!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+<!--[if lte IE 7]><link rel="stylesheet" href="/themes/grafika/style.ie7.css" media="screen" /><![endif]-->
+
+  
+<style type="text/css">#ya-site-form0,#ya-site-form0 .ya-site-form__form,#ya-site-form0 .ya-site-form__input,#ya-site-form0 .ya-site-form__input-text,#ya-site-form0 .ya-site-form__submit,#ya-site-form0 .ya-site-form__search-precise{font-size:12px!important;color:#000!important}#ya-site-form0 .ya-site-form__form-form{display:block}#ya-site-form0 .ya-site-form__form-form,#ya-site-form0 .ya-site-form__input,#ya-site-form0 .ya-site-form__search-precise,#ya-site-form0 .ya-site-form__search-precise__radio,#ya-site-form0 .ya-site-form__gap,#ya-site-form0 .ya-site-form__gap-i,#ya-site-form0 .ya-site-form__logo-img{margin:0;padding:0}#ya-site-form0{margin:0!important;padding:0!important}#ya-site-form0 .ya-site-form__logo-wrap{width:65px;vertical-align:top;border-collapse:collapse}#ya-site-form0 .ya-site-form__logo{display:block;width:52px;margin:0;padding:0 6px 0 0;text-decoration:none}#ya-site-form0 .ya-site-form__logo-img{width:52px;height:21px;border:0!important}#ya-site-form0 .ya-site-form__search-wrap{border-collapse:collapse}#ya-site-form0 .ya-site-form__search{font-size:12px!important;width:100%}#ya-site-form0 .ya-site-form__search-input,#ya-site-form0 .ya-site-form__search-precise,{border:0}#ya-site-form0 .ya-site-form__search-input{padding:6px}#ya-site-form0 .ya-site-form__search-input-layout,#ya-site-form0 .ya-site-form__search-input-layout-l,#ya-site-form0 .ya-site-form__search-input-layout-r{font-size:12px!important;padding:0;vertical-align:middle;border:0;border-collapse:collapse}#ya-site-form0 .ya-site-form__search-input-layout,#ya-site-form0 .ya-site-form__search-input-layout-l{width:100%}#ya-site-form0 .ya-site-form__search-precise{padding:0 18px 5px 6px;text-align:left;vertical-align:top}#ya-site-form0 .ya-site-form__search-precise-i{white-space:nowrap}#ya-site-form0 .ya-site-form__search-precise__radio{width:auto;margin:0 .3em 0 0;vertical-align:middle;background:none}#ya-site-form0 .ya-site-form__search-precise__label{margin:0 .4em 0 0;padding:0;vertical-align:middle}#ya-site-form0 .ya-site-form__input-text{width:100%;margin:0!important;cursor:text;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;background-color:#fff;border:1px solid #7f9db9;outline-style:none;-webkit-appearance:textfield}#ya-site-form0 .ya-site-form__input-text_type_hint{background-repeat:no-repeat;background-position:.2em 50%}#ya-site-form0 .ya-site-form__submit{display:block;width:auto;margin:0 0 0 5px}#ya-site-form0 .ya-site-form__arrow-wrap{overflow:hidden;width:30px;padding:0;vertical-align:middle}#ya-site-form0 .ya-site-form__arrow{position:relative}#ya-site-form0 .ya-site-form__arrow-a{position:absolute;top:50%;right:0;width:0;height:0;margin-top:-59px;border:solid transparent;border-width:59px 0 59px 30px;-moz-border-end-style:dotted}#ya-site-form0 .ya-site-form__wrap{width:100%;table-layout:fixed;border-collapse:collapse}#ya-site-form0 .ya-site-form__gap{border:0}#ya-site-form0 .ya-site-form__gap-i{width:9em}#ya-site-form0.ya-site-form_arrow_yes .ya-site-form__search-input{padding-right:0}#ya-site-form0.ya-site-form_logo_left .ya-site-form__logo{margin-top:4px;margin-left:5px}#ya-site-form0.ya-site-form_logo_top .ya-site-form__logo{display:block;margin:6px 0 0 6px}#ya-site-form0 .ya-site-form__submit_type_image{width:19px;height:15px;outline:none;cursor:pointer;border:0}#ya-site-form0 .ya-site-form__submit_type_image { background: url(https://site.yandex.net/v2.0/i/search.png) no-repeat }#ya-site-form0 .ya-site-form__form .ya-site-form__input-text::-webkit-input-placeholder{color:#cccccc;}#ya-site-form0 .ya-site-form__form .ya-site-form__input-text:-moz-placeholder{color:#cccccc;}#ya-site-form0 .ya-site-form__form .ya-site-form__input-text::-moz-placeholder{color:#cccccc;}#ya-site-form0 .ya-site-form__form .ya-site-form__input-text:-ms-input-placeholder{color:#cccccc;}#ya-site-form0 .ya-site-form__form * { font-size: 14px !important }#ya-site-form0 .ya-site-form__form .ya-site-form__input-text { font-style: normal!important }#ya-site-form0 .ya-site-form__form .ya-site-form__input-text { font-weight: normal!important }#ya-site-form0 .ya-site-form__form .ya-site-form__input-text { color: #000000!important }#ya-site-form0 .ya-site-form__form .ya-site-form__input-text { border-color: #666666!important }#ya-site-form0 .ya-site-form__form .ya-site-form__input-text:focus { border-color: #666666!important }#ya-site-form0 .ya-site-form__form .ya-site-form__input-text { background-color: #ffffff!important }#ya-site-form0 .ya-site-form__search, #ya-site-form0 .ya-site-form__search td, #ya-site-form0 .yaform__precise-i { background-color: #F8FAFB !important }#ya-site-form0 .ya-site-form__search-precise__label { color:#000000 !important }#ya-site-form0 .ya-site-form__arrow-a { border-left-color: #F8FAFB }</style><link title="Поиск по сайту Компьютерная графика" rel="search" type="application/opensearchdescription+xml" href="https://yandex.ru/search/site/opensearch.xml?ShortName=%D0%9F%D0%BE%D0%B8%D1%81%D0%BA%20%D0%BF%D0%BE%20%D1%81%D0%B0%D0%B9%D1%82%D1%83%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0&amp;InputEncoding=utf-8&amp;Image=&amp;Url-results=http%3A%2F%2Fgrafika.me%2Fsearch%3Fsearchid%3D2125932%26web%3D0%26text%3D%7BsearchTerms%7D&amp;Url-suggest=https%3A%2F%2Fsitesearch-suggest.yandex.ru%2Fv1%2Fsuggest%3F%26site%3D2125932%26lang%3Dru%26part%3D%7BsearchTerms%7D&amp;Url-opensearchdescr=https%3A%2F%2Fyandex.ru%2Fsearch%2Fsite%2Fopensearch.xml%3FShortName%3D%25D0%259F%25D0%25BE%25D0%25B8%25D1%2581%25D0%25BA%2520%25D0%25BF%25D0%25BE%2520%25D1%2581%25D0%25B0%25D0%25B9%25D1%2582%25D1%2583%2520%25D0%259A%25D0%25BE%25D0%25BC%25D0%25BF%25D1%258C%25D1%258E%25D1%2582%25D0%25B5%25D1%2580%25D0%25BD%25D0%25B0%25D1%258F%2520%25D0%25B3%25D1%2580%25D0%25B0%25D1%2584%25D0%25B8%25D0%25BA%25D0%25B0%26InputEncoding%3Dutf-8%26Image%3D%26Url-results%3Dhttp%253A%252F%252Fgrafika.me%252Fsearch%253Fsearchid%253D2125932%2526web%253D0%2526text%253D%257BsearchTerms%257D%26Url-suggest%3Dhttps%253A%252F%252Fsitesearch-suggest.yandex.ru%252Fv1%252Fsuggest%253F%2526site%253D2125932%2526lang%253Dru%2526part%253D%257BsearchTerms%257D"></head>
+
+<body class="not-front not-logged-in page-node node-type-lesson no-sidebars">
+
+<div id="gr-main">
+<header class="gr-header">
+
+    <div class="gr-shapes">
+
+            </div>
+<div class="gr-headline">
+  <a href="http://grafika.me/" title="Компьютерная графика">Компьютерная графика</a>
+</div>
+
+<h2 class="gr-slogan" data-left="1.56%">Уроки, алгоритмы, программы, примеры</h2>
+
+
+
+
+<nav class="gr-nav desktop-nav">
+     
+    <ul class=" gr-hmenu "><li class="leaf first"><a href="http://grafika.me/" title="Компьютерная графика">Главная</a></li>
+<li class="leaf"><a href="http://grafika.me/lectures" title="Статьи по компьютерной графике">Статьи</a></li>
+<li class="leaf"><a href="http://grafika.me/lab" title="Задачи для самостоятельной подготовки">Задачи</a></li>
+<li class="leaf"><a href="http://grafika.me/lessons" title="Уроки по основам компьютерной графики">Уроки</a></li>
+<li class="leaf"><a href="http://grafika.me/tools" title="Инструменты">Инструменты</a></li>
+<li class="leaf"><a href="http://grafika.me/demoscene" title="Небольшие демонстрационные программы">Демосцены</a></li>
+<li class="leaf last"><a href="http://grafika.me/students/2017" title="Студенты-авторы программ и уроков">Авторы</a></li>
+</ul></nav>
+                    
+</header>
+<div class="gr-sheet clearfix">
+            <div class="gr-layout-wrapper">
+                <div class="gr-content-layout">
+                    <div class="gr-content-layout-row">
+                        <div class="gr-layout-cell gr-sidebar1"><div class="clear-block block block-user" id="block-user-0">
+<div class="gr-block clearfix">
+        <div class="gr-blockheader"><h3 class="t subject">
+  Вход на сайт</h3>
+</div>
+        <div class="gr-blockcontent"><form action="/node/24.?destination=node%2F24." accept-charset="UTF-8" method="post" id="user-login-form">
+<div><div class="form-item" id="edit-name-wrapper">
+ <label for="edit-name">Имя пользователя: <span class="form-required" title="Обязательное поле">*</span></label>
+ <input type="text" maxlength="60" name="name" id="edit-name" size="15" class="form-text required">
+</div>
+<div class="form-item" id="edit-pass-wrapper">
+ <label for="edit-pass">Пароль: <span class="form-required" title="Обязательное поле">*</span></label>
+ <input type="password" name="pass" id="edit-pass" maxlength="60" size="15" class="form-text required">
+</div>
+<input type="submit" name="op" id="edit-submit" value="Вход на сайт" class="form-submit gr-button"><div class="item-list"><ul><li class="first"><a href="http://grafika.me/user/register" title="Создать новую учетную запись пользователя.">Регистрация</a></li>
+<li class="last"><a href="http://grafika.me/user/password" title="Запросить новый пароль по электронной почте.">Забыли пароль?</a></li>
+</ul></div><input type="hidden" name="form_build_id" id="form-S2Bap73H9EiSbRnP0sYKMo1s0XzaZXxaeQ1f5npzbDY" value="form-S2Bap73H9EiSbRnP0sYKMo1s0XzaZXxaeQ1f5npzbDY">
+<input type="hidden" name="form_id" id="edit-user-login-block" value="user_login_block">
+
+</div></form>
+</div>
+</div></div>
+<div class="clear-block block block-block" id="block-block-2">
+<div class="gr-block clearfix">
+        <div class="gr-blockheader"><h3 class="t subject">
+  Материалы по разделам</h3>
+</div>
+        <div class="gr-blockcontent"><div class="ya-site-form ya-site-form_inited_yes" id="ya-site-form0"><div class="ya-site-form__form"><table class="ya-site-form__wrap" cellspacing="0" cellpadding="0"><tbody><tr><td class="ya-site-form__search-wrap"><table class="ya-site-form__search" cellspacing="0" cellpadding="0"><tbody><tr><td class="ya-site-form__search-input"><table class="ya-site-form__search-input-layout"><tbody><tr><td class="ya-site-form__search-input-layout-l"><div class="ya-site-form__input"><input name="text" type="search" class="ya-site-form__input-text" placeholder="Поиск материала на сайте"></div></td><td class="ya-site-form__search-input-layout-r"><input class="ya-site-form__submit ya-site-form__submit_type_image" type="button" value=""></td></tr></tbody></table></td></tr><tr><td class="ya-site-form__gap"><div class="ya-site-form__gap-i"></div></td></tr></tbody></table></td></tr></tbody></table></div></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+<table class="block-category">
+<tbody><tr>
+<td>
+<a href="http://grafika.me/2D-graphics"><img src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/graph2d.png"></a>
+</td>
+<td>
+<a class="link-category" href="http://grafika.me/2D-graphics">Построения<br>на плоскости (2D)</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="http://grafika.me/3D-graphics"><img src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/graph3d.jpg"></a>
+</td>
+<td>
+<a class="link-category" href="http://grafika.me/3D-graphics">Графика<br>в пространстве (3D)</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="http://grafika.me/computational-geometry"><img src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/vgeom.png"></a>
+</td>
+<td>
+<a class="link-category" href="http://grafika.me/computational-geometry">Вычислительная<br>геометрия</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="http://grafika.me/physical-modeling"><img src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/phys.png"></a>
+</td>
+<td>
+<a class="link-category" href="http://grafika.me/physical-modeling">Физическое<br>моделирование</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="http://grafika.me/fractals"><img src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/fract.png"></a>
+</td>
+<td>
+<a class="link-category" href="http://grafika.me/fractals">Фрактальная<br>графика</a>
+</td>
+</tr>
+</tbody></table></div>
+</div></div>
+<div class="clear-block block block-views" id="block-views-last_comment-block_1">
+<div class="gr-block clearfix">
+        <div class="gr-blockheader"><h3 class="t subject">
+  Новые комментарии</h3>
+</div>
+        <div class="gr-blockcontent"><div class="view view-last-comment view-id-last_comment view-display-id-block_1 view-dom-id-1">
+    
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first">
+      
+  <div class="views-field-title">
+                <span class="field-content"><a href="http://grafika.me/node/322">Канторово множество на языке Pascal</a></span>
+  </div>
+  
+  <div class="views-field-comment">
+                <span class="field-content">Спасибо за статью. Я не Ваш студент. Но мне она помогла написать функцию для Канторова множества на Python для черепашки:
+
+import turtle
+def kanter(x, y, d):
+&nbsp;&nbsp;&nbsp;&nbsp;if d &gt; 1:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;turtle...</span>
+  </div>
+  </div>
+  <div class="views-row views-row-2 views-row-even">
+      
+  <div class="views-field-title">
+                <span class="field-content"><a href="http://grafika.me/node/297">Пример фрактала Жулиа на C#</a></span>
+  </div>
+  
+  <div class="views-field-comment">
+                <span class="field-content">Как реализовать в данном примере границы расчёта?</span>
+  </div>
+  </div>
+  <div class="views-row views-row-3 views-row-odd">
+      
+  <div class="views-field-title">
+                <span class="field-content"><a href="http://grafika.me/node/21">Как начать работать с графикой в Microsoft C#</a></span>
+  </div>
+  
+  <div class="views-field-comment">
+                <span class="field-content">Спасибо</span>
+  </div>
+  </div>
+  <div class="views-row views-row-4 views-row-even">
+      
+  <div class="views-field-title">
+                <span class="field-content"><a href="http://grafika.me/node/297">Пример фрактала Жулиа на C#</a></span>
+  </div>
+  
+  <div class="views-field-comment">
+                <span class="field-content">Спасибо</span>
+  </div>
+  </div>
+  <div class="views-row views-row-5 views-row-odd views-row-last">
+      
+  <div class="views-field-title">
+                <span class="field-content"><a href="http://grafika.me/node/520">Простая анимация на PascalABC.NET</a></span>
+  </div>
+  
+  <div class="views-field-comment">
+                <span class="field-content">приветь</span>
+  </div>
+  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div> </div>
+</div></div>
+<div class="clear-block block block-block" id="block-block-3">
+<div class="gr-block clearfix">
+        <div class="gr-blockheader"><h3 class="t subject">
+  Счетчики и рейтинг</h3>
+</div>
+        <div class="gr-blockcontent"><noindex>
+<center>
+
+<table width="250" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr>
+<td>
+<!-- Rating@Mail.ru counter -->
+<script type="text/javascript">
+var _tmr = _tmr || [];
+_tmr.push({id: "2475716", type: "pageView", start: (new Date()).getTime()});
+(function (d, w) {
+   var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true;
+   ts.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//top-fwz1.mail.ru/js/code.js";
+   var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
+   if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+})(document, window);
+</script><noscript><div style="position:absolute;left:-10000px;">
+<img src="//top-fwz1.mail.ru/counter?id=2475716;js=na" style="border:0;" height="1" width="1" alt="Рейтинг@Mail.ru" />
+</div></noscript>
+<!-- //Rating@Mail.ru counter -->
+<!-- Rating@Mail.ru logo -->
+<a href="http://top.mail.ru/jump?from=2475716" target="_blank" rel="nofollow">
+<img src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/counter.gif" style="border:0;" alt="Рейтинг@Mail.ru" width="88" height="31"></a>
+<!-- //Rating@Mail.ru logo -->
+</td>
+
+<td>
+<!-- Yandex.Metrika informer -->
+<a href="https://metrika.yandex.ru/stat/?id=20377678&amp;from=informer" target="_blank" rel="nofollow"><img src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/2_1_FFFFFFFF_EFEFEFFF_0_uniques.png" style="width:80px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (уникальные посетители)"></a>
+<!-- /Yandex.Metrika informer -->
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter20377678 = new Ya.Metrika({
+                    id:20377678,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/20377678" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</td>
+
+<td>
+<!--LiveInternet counter--><script type="text/javascript"><!--
+document.write("<a  rel=nofollow href='//www.liveinternet.ru/click' "+
+"target=_blank><img src='//counter.yadro.ru/hit?t21.10;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+
+"' alt='' title='LiveInternet: показано число просмотров за 24"+
+" часа, посетителей за 24 часа и за сегодня' "+
+"border='0' width='88' height='31'><\/a>")
+//--></script><a rel="nofollow" href="http://www.liveinternet.ru/click" target="_blank"><img src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/hit.gif" alt="" title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня" width="88" height="31" border="0"></a><!--/LiveInternet-->
+</td>
+
+</tr>
+</tbody></table>
+</center>
+</noindex>
+
+<script type="text/javascript">
+<!--
+var _acic={dataProvider:10};(function(){var e=document.createElement("script");e.type="text/javascript";e.async=true;e.src="//www.acint.net/aci.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})()
+//-->
+</script></div>
+</div></div>
+</div>                        <div class="gr-layout-cell gr-content">
+
+
+
+
+<div id="node-24" class="node lesson">
+<article class="gr-post gr-article">
+                                <div class="gr-postmetadataheader">
+                                        <h1 class="gr-postheader"><span class="gr-postheadericon">Основы библиотеки System.Drawing</span></h1>
+                                    </div>
+                                                <div class="gr-postheadericons gr-metadata-icons"><span class="gr-postdateicon">10. Февраль 2013 - 10:30</span>&nbsp;|&nbsp;<span class="gr-postauthoricon"><a href="http://grafika.me/user/12" title="Информация о пользователе.">Суинов Герай</a></span></div>
+                <div class="gr-postcontent gr-postcontent-0 clearfix"><div class="gr-article">
+    <div class="field field-type-text field-field-les-soft">
+      <div class="field-label">Среда программирования:&nbsp;</div>
+    <div class="field-items">
+            <div class="field-item odd">
+                    Microsoft C#        </div>
+        </div>
+</div>
+<p>Пространство имен System.Drawing обеспечивает доступ к функциональным возможностям графического интерфейса GDI+.<br>
+Пространства имен:</p>
+<ul>
+<li>System.Drawing.Drawing2D, </li>
+<li>System.Drawing.Imaging, </li>
+<li>System.Drawing.Text</li>
+</ul>
+<p>обеспечивают дополнительные функциональные возможности.</p>
+<p>Класс Graphics предоставляет методы рисования на устройстве отображения.<br>
+Такие классы, как <strong>Rectangle</strong> и <strong>Point</strong>, инкапсулируют элементы GDI+.<br>
+Класс <strong>Pen</strong> используется для рисования линий и кривых, а классы, производные от абстрактного класса <strong>Brush</strong>, используются для заливки фигур.</p>
+Класс - Graphics
+<p>Инкапсулирует поверхность рисования GDI+. Этот класс не наследуется.</p>
+<p>Методов в этом классе огромное количество, поэтому рассмотрим некоторые из них:</p>
+<table cellspacing="4" cellpadding="7" border="1">
+<tbody><tr>
+<td>
+<div class="editor-center-button"><strong>Имя</strong></div>
+</td>
+<td>
+<div class="editor-center-button"><strong>Описание</strong></div>
+</td>
+</tr>
+<tr>
+<td>AddMetafileComment</td>
+<td>Добавляет комментарий к текущему объекту Metafile.</td>
+</tr>
+<tr>
+<td>BeginContainer()</td>
+<td>Сохраняет графический контейнер, содержащий текущее состояние 
+данного объекта Graphics, а затем открывает и использует новый 
+графический контейнер.</td>
+</tr>
+<tr>
+<td>BeginContainer(Rectangle, Rectangle, GraphicsUnit)</td>
+<td>Сохраняет графический контейнер, содержащий текущее состояние 
+данного объекта Graphics, а также открывает и использует новый 
+графический контейнер с указанным преобразованием масштаба.</td>
+</tr>
+<tr>
+<td>BeginContainer(RectangleF, RectangleF, GraphicsUnit)</td>
+<td>Сохраняет графический контейнер, содержащий текущее состояние 
+данного объекта Graphics, а также открывает и использует новый 
+графический контейнер с указанным преобразованием масштаба.</td>
+</tr>
+<tr>
+<td>Clear</td>
+<td>Очищает всю поверхность рисования и выполняет заливку поверхности указанным цветом фона.</td>
+</tr>
+<tr>
+<td>CopyFromScreen(Point, Point, Size)</td>
+<td>Выполняет передачу данных о цвете, соответствующих прямоугольной 
+области пикселей, блоками битов с экрана на поверхность рисования 
+объекта Graphics.</td>
+</tr>
+<tr>
+<td>CopyFromScreen(Point, Point, Size, CopyPixelOperation)</td>
+<td>Выполняет передачу данных о цвете, соответствующих прямоугольной 
+области пикселей, блоками битов с экрана на поверхность рисования 
+объекта Graphics.</td>
+</tr>
+<tr>
+<td>CopyFromScreen(Int32, Int32, Int32, Int32, Size)</td>
+<td>Выполняет передачу данных о цвете, соответствующих прямоугольной 
+области пикселей, блоками битов с экрана на поверхность рисования 
+объекта Graphics.</td>
+</tr>
+<tr>
+<td>Dispose</td>
+<td>Освобождает все ресурсы, используемые данным объектом Graphics.</td>
+</tr>
+<tr>
+<td>DrawArc(Pen, Rectangle, Single, Single)</td>
+<td>Рисует дугу, которая является частью эллипса, заданного структурой Rectangle.</td>
+</tr>
+<tr>
+<td>DrawArc(Pen, Int32, Int32, Int32, Int32, Int32, Int32)</td>
+<td>Рисует дугу, которая является частью эллипса, заданного парой координат, шириной и высотой.</td>
+</tr>
+<tr>
+<td>DrawArc(Pen, Single, Single, Single, Single, Single, Single)</td>
+<td>Рисует дугу, которая является частью эллипса, заданного парой координат, шириной и высотой.</td>
+</tr>
+<tr>
+<td>DrawBezier(Pen, Point, Point, Point, Point)</td>
+<td>Рисует кривую Безье, определяемую четырьмя структурами Point.</td>
+</tr>
+<tr>
+<td>DrawLine(Pen, Point, Point)</td>
+<td>Проводит линию, соединяющую две структуры Point.</td>
+</tr>
+<tr>
+<td>DrawLine(Pen, Int32, Int32, Int32, Int32)</td>
+<td>Проводит линию, соединяющую две точки, задаваемые парами координат.</td>
+</tr>
+<tr>
+<td>DrawLine(Pen, Single, Single, Single, Single)</td>
+<td>Проводит линию, соединяющую две точки, задаваемые парами координат.</td>
+</tr>
+<tr>
+<td>DrawLines(Pen, Point[])</td>
+<td>Рисует набор сегментов линий, которые соединяют массив структур Point.</td>
+</tr>
+<tr>
+<td>DrawPath</td>
+<td>Рисует объект GraphicsPath.</td>
+</tr>
+<tr>
+<td>DrawPie(Pen, Rectangle, Single, Single)</td>
+<td>Рисует сектор, который определяется эллипсом, заданным структурой Rectangle и двумя радиальными линиями.</td>
+</tr>
+<tr>
+<td>DrawPie(Pen, Int32, Int32, Int32, Int32, Int32, Int32)</td>
+<td>Рисует сектор, определяемый эллипсом, который задан парой координат, шириной, высотой и двумя радиальными линиями.</td>
+</tr>
+<tr>
+<td>DrawPie(Pen, Single, Single, Single, Single, Single, Single)</td>
+<td>Рисует сектор, определяемый эллипсом, который задан парой координат, шириной, высотой и двумя радиальными линиями.</td>
+</tr>
+<tr>
+<td>DrawPolygon(Pen, Point[])</td>
+<td>Рисует многоугольник, определяемый массивом структур Point.</td>
+</tr>
+<tr>
+<td>DrawRectangle(Pen, Rectangle)</td>
+<td>Рисует прямоугольник, определяемый структурой Rectangle.</td>
+</tr>
+<tr>
+<td>DrawRectangle(Pen, Int32, Int32, Int32, Int32)</td>
+<td>Рисует прямоугольник, который определен парой координат, шириной и высотой.</td>
+</tr>
+<tr>
+<td>DrawRectangle(Pen, Single, Single, Single, Single)</td>
+<td>Рисует прямоугольник, который определен парой координат, шириной и высотой.</td>
+</tr>
+<tr>
+<td>DrawRectangles(Pen, Rectangle[])</td>
+<td>Рисует набор прямоугольников, определяемых структурами Rectangle.</td>
+</tr>
+<tr>
+<td>DrawString(String, Font, Brush, PointF)</td>
+<td>Создает указываемую текстовую строку в заданном месте с помощью определяемых объектов Brush и Font.</td>
+</tr>
+<tr>
+<td>DrawString(String, Font, Brush, PointF, StringFormat)</td>
+<td>Рисует заданную текстовую строку в заданном месте с помощью 
+определяемых объектов Brush и Font, используя атрибуты форматирования 
+заданного формата StringFormat.</td>
+</tr>
+<tr>
+<td>DrawString(String, Font, Brush, Single, Single)</td>
+<td>Создает указываемую текстовую строку в заданном месте с помощью определяемых объектов Brush и Font.</td>
+</tr>
+<tr>
+<td>Equals(Object)</td>
+<td>Определяет, равен ли заданный объект текущему объекту. (Унаследовано от Object.)</td>
+</tr>
+<tr>
+<td>ExcludeClip(Rectangle)</td>
+<td>Обновляет вырезанную область данного объекта Graphics, чтобы исключить из нее часть, определяемую структурой Rectangle.</td>
+</tr>
+<tr>
+<td>ExcludeClip(Region)</td>
+<td>Обновляет вырезанную область данного объекта Graphics, чтобы исключить из нее часть, определяемую структурой Region.</td>
+</tr>
+<tr>
+<td>FillClosedCurve(Brush, Point[])</td>
+<td>Заполняет внутреннюю часть замкнутой фундаментальной кривой, определяемой массивом структур Point.</td>
+</tr>
+<tr>
+<td>FillClosedCurve(Brush, Point[], FillMode)</td>
+<td>Заполняет внутреннюю часть замкнутой фундаментальной сплайновой 
+кривой, определяемой массивом структур Point, используя указанный режим 
+заливки.</td>
+</tr>
+<tr>
+<td>FillClosedCurve(Brush, Point[], FillMode, Single)</td>
+<td>Заполняет внутреннюю часть замкнутой фундаментальной кривой, 
+определяемой массивом структур Point, используя указанные режим заливки и
+ натяжение.</td>
+</tr>
+<tr>
+<td>FillEllipse(Brush, Rectangle)</td>
+<td>Заполняет внутреннюю часть эллипса, определяемого ограничивающим прямоугольником, который задан структурой Rectangle.</td>
+</tr>
+<tr>
+<td>FillEllipse(Brush, Int32, Int32, Int32, Int32)</td>
+<td>Заполняет внутреннюю часть эллипса, определяемого ограничивающим 
+прямоугольником, заданным с помощью пары координат, ширины и высоты.</td>
+</tr>
+<tr>
+<td>FillEllipse(Brush, Single, Single, Single, Single)</td>
+<td>Заполняет внутреннюю часть эллипса, определяемого ограничивающим 
+прямоугольником, заданным с помощью пары координат, ширины и высоты.</td>
+</tr>
+<tr>
+<td>FillPath</td>
+<td>Заполняет внутреннюю часть объекта GraphicsPath.</td>
+</tr>
+<tr>
+<td>FillPie(Brush, Rectangle, Single, Single)</td>
+<td>Заполняет внутреннюю часть сектора, определяемого эллипсом, который задан структурой RectangleF, и двумя радиальными линиями.</td>
+</tr>
+<tr>
+<td>FillPie(Brush, Int32, Int32, Int32, Int32, Int32, Int32)</td>
+<td>Заполняет внутреннюю часть сектора, определяемого эллипсом, который 
+задан парой координат, шириной, высотой и двумя радиальными линиями.</td>
+</tr>
+<tr>
+<td>FillPie(Brush, Single, Single, Single, Single, Single, Single)</td>
+<td>Заполняет внутреннюю часть сектора, определяемого эллипсом, который 
+задан парой координат, шириной, высотой и двумя радиальными линиями.</td>
+</tr>
+<tr>
+<td>FillPolygon(Brush, Point[])</td>
+<td>Заполняет внутреннюю часть многоугольника, определяемого массивом точек, заданных структурами Point.</td>
+</tr>
+<tr>
+<td>FillPolygon(Brush, Point[], FillMode)</td>
+<td>Заполняет внутреннюю часть многоугольника, определенного массивом 
+точек, заданных структурами Point, используя указанный режим заливки.</td>
+</tr>
+<tr>
+<td>FillRectangle(Brush, Rectangle)</td>
+<td>Заполняет внутреннюю часть прямоугольника, определяемого структурой Rectangle.</td>
+</tr>
+<tr>
+<td>FillRectangle(Brush, Int32, Int32, Int32, Int32)</td>
+<td>Заполняет внутреннюю часть прямоугольника, который определен парой координат, шириной и высотой.</td>
+</tr>
+<tr>
+<td>FillRectangle(Brush, Single, Single, Single, Single)</td>
+<td>Заполняет внутреннюю часть прямоугольника, который определен парой координат, шириной и высотой.</td>
+</tr>
+<tr>
+<td>FillRectangles(Brush, Rectangle[])</td>
+<td>Заполняет внутреннюю часть набора прямоугольников, определяемых структурами Rectangle.</td>
+</tr>
+<tr>
+<td>FillRegion</td>
+<td>Заполняет внутреннюю часть объекта Region.</td>
+</tr>
+<tr>
+<td>Flush()</td>
+<td>Вызывает принудительное выполнение всех отложенных графических операций и немедленно возвращается, не дожидаясь их окончания.</td>
+</tr>
+<tr>
+<td>Flush(FlushIntention)</td>
+<td>Вызывает принудительное выполнение всех отложенных графических 
+операций. При этом в соответствии с настройкой метод дожидается или не 
+дожидается окончания операций для возврата.</td>
+</tr>
+</tbody></table>
+Класс - Pen
+<p>Определяет объект, используемый для рисования прямых линий и кривых. Этот класс не наследуется.</p>
+<p></p><p><br>
+</p><table cellspacing="4" cellpadding="7" border="1">
+<tbody><tr>
+<td>Pen(Color)</td>
+
+<td>Инициализирует новый экземпляр класса Pen с указанным цветом.</td>
+</tr>
+<tr>
+<td>Pen(Color, Single)</td>
+<td>Инициализирует новый экземпляр класса Pen с указанными свойствами 
+Color и Width. (Width - устанавливает ширину пера Pen, в единицах 
+объекта Graphics, используемого для рисования)</td>
+</tr>
+</tbody></table>
+Класс - Brush
+<p>Определяет объекты, которые используются для заливки внутри 
+графических фигур, таких как прямоугольники, эллипсы, круги, 
+многоугольники и дорожки.</p>
+<p>Это абстрактный базовый класс, который не может быть реализован.Для 
+создания объекта "кисть" используются классы, производные от Brush, 
+такие как <em>SolidBrush</em>, <em>TextureBrush</em> и <em>LinearGradientBrush</em>.</p>
+<p>Пример:<br>
+</p><div class="geshifilter"><pre class="csharp geshifilter-csharp" style="font-family:monospace;"><span style="color: #0600FF; font-weight: bold;">private</span> <span style="color: #6666cc; font-weight: bold;">void</span> pictureBox1_Click<span style="color: #008000;">(</span><span style="color: #6666cc; font-weight: bold;">object</span> sender, EventArgs e<span style="color: #008000;">)</span>
+        <span style="color: #008000;">{</span>
+            <span style="color: #008080; font-style: italic;">//Выбираем перо "myPen" черного цвета Black</span>
+            <span style="color: #008080; font-style: italic;">//толщиной в 1 пиксель:</span>
+            Pen myWind <span style="color: #008000;">=</span> <a href="http://www.google.com/search?q=new+msdn.microsoft.com"><span style="color: #008000;">new</span></a> Pen<span style="color: #008000;">(</span>Color<span style="color: #008000;">.</span><span style="color: #0000FF;">Black</span>, <span style="color: #FF0000;">2</span><span style="color: #008000;">)</span><span style="color: #008000;">;</span>
+            <span style="color: #008080; font-style: italic;">//Объявляем объект "g" класса Graphics и предоставляем</span>
+            <span style="color: #008080; font-style: italic;">//ему возможность рисования на pictureBox1:</span>
+            Graphics g <span style="color: #008000;">=</span> pictureBox1<span style="color: #008000;">.</span><span style="color: #0000FF;">CreateGraphics</span><span style="color: #008000;">(</span><span style="color: #008000;">)</span><span style="color: #008000;">;</span> 
+            <span style="color: #008080; font-style: italic;">// Создаем объекты для закрашивания фигур</span>
+            SolidBrush myCorp <span style="color: #008000;">=</span> <a href="http://www.google.com/search?q=new+msdn.microsoft.com"><span style="color: #008000;">new</span></a> SolidBrush<span style="color: #008000;">(</span>Color<span style="color: #008000;">.</span><span style="color: #0000FF;">Black</span><span style="color: #008000;">)</span><span style="color: #008000;">;</span>
+            SolidBrush myTrum <span style="color: #008000;">=</span> <a href="http://www.google.com/search?q=new+msdn.microsoft.com"><span style="color: #008000;">new</span></a> SolidBrush<span style="color: #008000;">(</span>Color<span style="color: #008000;">.</span><span style="color: #0000FF;">Green</span><span style="color: #008000;">)</span><span style="color: #008000;">;</span>
+            SolidBrush myTrub <span style="color: #008000;">=</span> <a href="http://www.google.com/search?q=new+msdn.microsoft.com"><span style="color: #008000;">new</span></a> SolidBrush<span style="color: #008000;">(</span>Color<span style="color: #008000;">.</span><span style="color: #0000FF;">Gray</span><span style="color: #008000;">)</span><span style="color: #008000;">;</span>
+            SolidBrush mySe <span style="color: #008000;">=</span> <a href="http://www.google.com/search?q=new+msdn.microsoft.com"><span style="color: #008000;">new</span></a> SolidBrush<span style="color: #008000;">(</span>Color<span style="color: #008000;">.</span><span style="color: #0000FF;">Blue</span><span style="color: #008000;">)</span><span style="color: #008000;">;</span>
+            <span style="color: #008080; font-style: italic;">// Закрашиваем фигуры</span>
+            g<span style="color: #008000;">.</span><span style="color: #0000FF;">FillRectangle</span><span style="color: #008000;">(</span>myTrub,<span style="color: #FF0000;">300</span>,<span style="color: #FF0000;">125</span>,<span style="color: #FF0000;">75</span>,<span style="color: #FF0000;">75</span><span style="color: #008000;">)</span><span style="color: #008000;">;</span>
+            g<span style="color: #008000;">.</span><span style="color: #0000FF;">FillRectangle</span><span style="color: #008000;">(</span>myTrub,<span style="color: #FF0000;">480</span>,<span style="color: #FF0000;">125</span>,<span style="color: #FF0000;">75</span>,<span style="color: #FF0000;">75</span><span style="color: #008000;">)</span><span style="color: #008000;">;</span>
+            g<span style="color: #008000;">.</span><span style="color: #0000FF;">FillPolygon</span><span style="color: #008000;">(</span>myCorp, <a href="http://www.google.com/search?q=new+msdn.microsoft.com"><span style="color: #008000;">new</span></a> Point<span style="color: #008000;">[</span><span style="color: #008000;">]</span> <span style="color: #008000;">{</span>
+                <a href="http://www.google.com/search?q=new+msdn.microsoft.com"><span style="color: #008000;">new</span></a> Point<span style="color: #008000;">(</span><span style="color: #FF0000;">100</span>,<span style="color: #FF0000;">300</span><span style="color: #008000;">)</span>,<a href="http://www.google.com/search?q=new+msdn.microsoft.com"><span style="color: #008000;">new</span></a> Point<span style="color: #008000;">(</span><span style="color: #FF0000;">700</span>,<span style="color: #FF0000;">300</span><span style="color: #008000;">)</span>,
+                <a href="http://www.google.com/search?q=new+msdn.microsoft.com"><span style="color: #008000;">new</span></a> Point<span style="color: #008000;">(</span><span style="color: #FF0000;">700</span>,<span style="color: #FF0000;">300</span><span style="color: #008000;">)</span>,<a href="http://www.google.com/search?q=new+msdn.microsoft.com"><span style="color: #008000;">new</span></a> Point<span style="color: #008000;">(</span><span style="color: #FF0000;">600</span>,<span style="color: #FF0000;">400</span><span style="color: #008000;">)</span>,
+                <a href="http://www.google.com/search?q=new+msdn.microsoft.com"><span style="color: #008000;">new</span></a> Point<span style="color: #008000;">(</span><span style="color: #FF0000;">600</span>,<span style="color: #FF0000;">400</span><span style="color: #008000;">)</span>,<a href="http://www.google.com/search?q=new+msdn.microsoft.com"><span style="color: #008000;">new</span></a> Point<span style="color: #008000;">(</span><span style="color: #FF0000;">200</span>,<span style="color: #FF0000;">400</span><span style="color: #008000;">)</span>,
+                <a href="http://www.google.com/search?q=new+msdn.microsoft.com"><span style="color: #008000;">new</span></a> Point<span style="color: #008000;">(</span><span style="color: #FF0000;">200</span>,<span style="color: #FF0000;">400</span><span style="color: #008000;">)</span>,<a href="http://www.google.com/search?q=new+msdn.microsoft.com"><span style="color: #008000;">new</span></a> Point<span style="color: #008000;">(</span><span style="color: #FF0000;">100</span>,<span style="color: #FF0000;">300</span><span style="color: #008000;">)</span>
+            <span style="color: #008000;">}</span> <span style="color: #008000;">)</span><span style="color: #008000;">;</span>
+            g<span style="color: #008000;">.</span><span style="color: #0000FF;">FillRectangle</span><span style="color: #008000;">(</span>myTrum, <span style="color: #FF0000;">250</span>, <span style="color: #FF0000;">200</span>, <span style="color: #FF0000;">350</span>, <span style="color: #FF0000;">100</span><span style="color: #008000;">)</span><span style="color: #008000;">;</span>
+            <span style="color: #6666cc; font-weight: bold;">int</span> x <span style="color: #008000;">=</span> <span style="color: #FF0000;">50</span><span style="color: #008000;">;</span>
+            <span style="color: #6666cc; font-weight: bold;">int</span> Radius <span style="color: #008000;">=</span> <span style="color: #FF0000;">50</span><span style="color: #008000;">;</span>
+            <span style="color: #008080; font-style: italic;">// Море</span>
+            <span style="color: #0600FF; font-weight: bold;">while</span> <span style="color: #008000;">(</span>x <span style="color: #008000;">&lt;=</span> pictureBox1<span style="color: #008000;">.</span><span style="color: #0000FF;">Width</span> <span style="color: #008000;">-</span> Radius<span style="color: #008000;">)</span>
+            <span style="color: #008000;">{</span>
+                g<span style="color: #008000;">.</span><span style="color: #0000FF;">FillPie</span><span style="color: #008000;">(</span>mySe, <span style="color: #FF0000;">0</span> <span style="color: #008000;">+</span> x, <span style="color: #FF0000;">375</span>, <span style="color: #FF0000;">50</span>, <span style="color: #FF0000;">50</span>,<span style="color: #FF0000;">0</span>, <span style="color: #008000;">-</span><span style="color: #FF0000;">180</span><span style="color: #008000;">)</span><span style="color: #008000;">;</span>
+                x <span style="color: #008000;">+=</span> <span style="color: #FF0000;">50</span><span style="color: #008000;">;</span>
+            <span style="color: #008000;">}</span>
+            <span style="color: #008080; font-style: italic;">// Окошки</span>
+            <span style="color: #0600FF; font-weight: bold;">for</span> <span style="color: #008000;">(</span><span style="color: #6666cc; font-weight: bold;">int</span> y <span style="color: #008000;">=</span> <span style="color: #FF0000;">300</span><span style="color: #008000;">;</span> y <span style="color: #008000;">&lt;=</span> <span style="color: #FF0000;">550</span><span style="color: #008000;">;</span> y <span style="color: #008000;">+=</span> <span style="color: #FF0000;">50</span><span style="color: #008000;">)</span>
+            <span style="color: #008000;">{</span>
+                g<span style="color: #008000;">.</span><span style="color: #0000FF;">DrawEllipse</span><span style="color: #008000;">(</span>myWind, y, <span style="color: #FF0000;">240</span>, <span style="color: #FF0000;">20</span>, <span style="color: #FF0000;">20</span><span style="color: #008000;">)</span><span style="color: #008000;">;</span>
+            <span style="color: #008000;">}</span>
+&nbsp;
+        <span style="color: #008000;">}</span></pre></div><p></p>
+<p><img src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/pic.jpg" alt="" title="" width="650" height="489"></p>
+</div>
+</div>
+<div class="gr-postmetadatafooter">
+                                        <div class="gr-postfootericons gr-metadata-icons"><span class="gr-postcommentsicon"><a href="http://grafika.me/user/login?destination=comment%2Freply%2F24%23comment-form">Войдите</a> или <a href="http://grafika.me/user/register?destination=comment%2Freply%2F24%23comment-form">зарегистрируйтесь</a>, чтобы комментировать</span>	</div>
+                                    </div>
+                
+
+</article></div>
+<div id="comments">
+    <div class="gr-box gr-post">
+      <div class="gr-box-body gr-post-body">
+  <article class="gr-post-inner gr-article">
+  <h2 class="gr-postheader comments">Комментарии</h2>  <div class="gr-postcontent">
+  <a id="comment-28"></a>
+
+<div id="comments" class="gr-comments">
+	<div class="gr-comment gr-postcontent  comment-published odd">
+
+		<div class="gr-comment-avatar">
+			<div class="picture">
+  <a href="http://grafika.me/user/328" title="Информация о пользователе."><img src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/no-avatar.jpg" alt="releyshic аватар" title="releyshic аватар"></a></div>
+		</div>
+
+		<div class="gr-comment-inner">
+			<div class="gr-comment-header">
+				Опубликовано <a href="http://grafika.me/user/328" title="Информация о пользователе.">releyshic</a> в 7. Ноябрь 2014 - 12:34.							</div>
+			<div class="gr-comment-content content">
+				<p>Код не работал в VS2008, при нажатии на окно ничего не происходило<br>
+Потом увеличил в настройках Pictura рего размер и заработало<br>
+В чем дело тут?<br>
+Как сделать чтобы Размер окна PicturBox изменялся пропорционально размеру Окна программы?<br>
+Как сделать панель графических элементов (на основе стандартных элеменов
+ управления VS), которые можно будет перетаскивать на Рабочее 
+пространство (те.PicturBox) как например в MS Visio?</p>
+							</div>
+							<div class="gr-comment-footer">
+					<ul class="links"><li class="comment_forbidden first last"><span><a href="http://grafika.me/user/login?destination=comment%2Freply%2F24%23comment-form">Войдите</a> или <a href="http://grafika.me/user/register?destination=comment%2Freply%2F24%23comment-form">зарегистрируйтесь</a>, чтобы комментировать</span></li>
+</ul>				</div>
+					</div>
+	</div>
+</div>
+
+<div class="indented"><a id="comment-29"></a>
+
+<div id="comments" class="gr-comments">
+	<div class="gr-comment gr-postcontent  comment-published even">
+
+		<div class="gr-comment-avatar">
+			<div class="picture">
+  <a href="http://grafika.me/user/1" title="Информация о пользователе."><img src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/no-avatar.jpg" alt="admin аватар" title="admin аватар"></a></div>
+		</div>
+
+		<div class="gr-comment-inner">
+			<div class="gr-comment-header">
+				Опубликовано <a href="http://grafika.me/user/1" title="Информация о пользователе.">admin</a> в 7. Ноябрь 2014 - 13:59.							</div>
+			<div class="gr-comment-content content">
+				<p>Используйте у PictureBox Свойство Anchor (якоря) для привязки границ элемента к границам окна. </p>							</div>
+							<div class="gr-comment-footer">
+					<ul class="links"><li class="comment_forbidden first last"><span><a href="http://grafika.me/user/login?destination=comment%2Freply%2F24%23comment-form">Войдите</a> или <a href="http://grafika.me/user/register?destination=comment%2Freply%2F24%23comment-form">зарегистрируйтесь</a>, чтобы комментировать</span></li>
+</ul>				</div>
+					</div>
+	</div>
+</div>
+
+<div class="indented"><a id="comment-30"></a>
+
+<div id="comments" class="gr-comments">
+	<div class="gr-comment gr-postcontent  comment-published odd">
+
+		<div class="gr-comment-avatar">
+			<div class="picture">
+  <a href="http://grafika.me/user/328" title="Информация о пользователе."><img src="%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8%20System.Drawing%20%20%20%D0%9A%D0%BE%D0%BC%D0%BF%D1%8C%D1%8E%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_files/no-avatar.jpg" alt="releyshic аватар" title="releyshic аватар"></a></div>
+		</div>
+
+		<div class="gr-comment-inner">
+			<div class="gr-comment-header">
+				Опубликовано <a href="http://grafika.me/user/328" title="Информация о пользователе.">releyshic</a> в 13. Ноябрь 2014 - 12:40.							</div>
+			<div class="gr-comment-content content">
+				<p>Спасибо! Помогло )</p>
+							</div>
+							<div class="gr-comment-footer">
+					<ul class="links"><li class="comment_forbidden first last"><span><a href="http://grafika.me/user/login?destination=comment%2Freply%2F24%23comment-form">Войдите</a> или <a href="http://grafika.me/user/register?destination=comment%2Freply%2F24%23comment-form">зарегистрируйтесь</a>, чтобы комментировать</span></li>
+</ul>				</div>
+					</div>
+	</div>
+</div>
+
+</div></div>  </div>
+  <div class="cleared"></div>
+  </article>
+  <div class="cleared"></div>
+  </div>
+  </div>
+  </div>
+	
+
+
+
+
+<article class="gr-post gr-article">
+                                
+                                                
+                <div class="gr-postcontent"><div class="breadcrumb gr-postcontent"><a href="http://grafika.me/">Главная</a></div></div>
+</article>
+
+</div>
+                    </div>
+                </div>
+            </div><footer class="gr-footer">Copyright © 2012-2019 • <a href="http://grafika.me/">Компьютерная графика</a></footer>
+
+    </div>
+</div>
+
+
+
+
+<iframe src="//www.acint.net/mc/?dp=10" style="width:1px;height:1px;display:none;" width="0" height="0" frameborder="0"></iframe></body></html>
