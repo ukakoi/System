@@ -1,0 +1,10 @@
+C:\Users\isus\source\repos\nasledovanie\nasledovanie\bin\Debug\nasledovanie.exe.config
+C:\Users\isus\source\repos\nasledovanie\nasledovanie\bin\Debug\nasledovanie.exe
+C:\Users\isus\source\repos\nasledovanie\nasledovanie\bin\Debug\nasledovanie.pdb
+C:\Users\isus\source\repos\nasledovanie\nasledovanie\obj\Debug\nasledovanie.csprojAssemblyReference.cache
+C:\Users\isus\source\repos\nasledovanie\nasledovanie\obj\Debug\nasledovanie.Form1.resources
+C:\Users\isus\source\repos\nasledovanie\nasledovanie\obj\Debug\nasledovanie.Properties.Resources.resources
+C:\Users\isus\source\repos\nasledovanie\nasledovanie\obj\Debug\nasledovanie.csproj.GenerateResource.cache
+C:\Users\isus\source\repos\nasledovanie\nasledovanie\obj\Debug\nasledovanie.csproj.CoreCompileInputs.cache
+C:\Users\isus\source\repos\nasledovanie\nasledovanie\obj\Debug\nasledovanie.exe
+C:\Users\isus\source\repos\nasledovanie\nasledovanie\obj\Debug\nasledovanie.pdb
